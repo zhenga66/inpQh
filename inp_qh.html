@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+				input{
+					/* width: 300px; */
+				}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var inp = document.querySelectorAll("input")
+				// 2.获取input 框的值
+				      // var value = inp.innerText
+				// 3.通过setSelectionRange 选中文字
+				// k.select()
+				
+				// var selection = inp.value.substring(inp.selectionStart,inp.selectionEnd);
+				var ee = 0;
+				var arr = [];
+				for(var j=0; j<inp.length; j++){
+					if(inp[j].type != "hidden"){
+							arr.push(inp[j])
+					}
+				}
+				
+				document.onkeydown = function (event) {
+					
+					console.log(event)
+					var e = event || window.event
+					var k = e.keyCode
+					console.log(k)
+					for(var i=0; i<arr.length; i++){
+						if(k == 13 || k == 9){
+							ee++
+							if(ee < arr.length){
+								arr[ee].focus();
+								return false;
+							}else{
+								arr[0].focus();
+								ee = -1
+							}
+						}
+						if(k == 37){
+								ee--
+								console.log(ee)
+								if(ee >= 0){
+									arr[ee].focus();
+									return false;
+								}else{
+									ee = inp.length
+								}
+								
+						}
+						else if(k == 39){
+							ee++
+							if(ee == inp.length){
+								ee = -1
+							}else{
+								arr[ee].focus();
+								return false;
+							}
+						}
+						else if(k == 38){
+							ee = ee-4
+							if(ee < 0){
+								ee = ee+4
+							}else{
+								arr[ee].focus();
+								return false;
+							}
+						}
+						else if(k == 40){
+							ee = ee+4
+							if(ee <arr.length){
+									arr[ee].focus();
+									return false;
+							}else{
+								ee = ee-4
+							}
+						}else if(event.ctrlKey && k == 90){
+							console.log(111)
+							e.target.select()
+							return false;
+						}
+					}
+				}
+				
+				for(var i=0; i<arr.length; i++){
+					arr[i].index = i
+					arr[i].onclick = function(){
+						ee = this.index
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+		</div>
+		<div id="box2">
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+		</div>
+		<div id="box3">
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+			<input type="text"/>
+		</div>
+	</body>
+</html>		
+
+ 
+
